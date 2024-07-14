@@ -122,13 +122,13 @@ st.set_page_config(page_title="Chest X-ray Classifier", layout="wide")
 st.divider()
 
 # Заголовок и ссылки в сайдбаре
+st.sidebar.divider()
 st.sidebar.write("[Uzun Demir](https://uzundemir.github.io/)")
 st.sidebar.write("[Github](https://github.com/UzunDemir)")
 st.sidebar.write("[Linkedin](https://www.linkedin.com/in/uzundemir/)")
 st.sidebar.title("Описание проекта")
 st.sidebar.title('Chest X-Ray Classification')
 st.sidebar.markdown('<img src="https://github.com/UzunDemir/Chest_X-Ray_Classification/blob/main/Projectional_rendering_of_CT_scan_of_thorax_(thumbnail).gif?raw=true" width="100%">', unsafe_allow_html=True)
-st.sidebar.divider()
 st.sidebar.divider()
 st.sidebar.write(
     """
