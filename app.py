@@ -111,7 +111,7 @@ st.markdown("""
     }
     </style>
     <div class="center">
-        <img src="https://github.com/UzunDemir/mnist_777/blob/main/200w.gif?raw=true">        
+        <img src="https://github.com/UzunDemir/Chest_X-Ray_Classification/blob/main/Projectional_rendering_of_CT_scan_of_thorax_(thumbnail).gif?raw=true">        
     </div>
     """, unsafe_allow_html=True)
 st.divider()
