@@ -85,12 +85,16 @@
 #     if uploaded_file is not None:
 #         st.image(image, caption="Uploaded Image", use_column_width=True)
 # Импорт необходимых библиотек
+# Импорт необходимых библиотек
 import streamlit as st
 import numpy as np
 import tensorflow as tf
 from PIL import Image
 
-# Заголовок в сайдбаре с ссылками на профили
+# Настройка страницы Streamlit в самом начале скрипта
+st.set_page_config(page_title="Chest X-ray Classifier", layout="wide")
+
+# Заголовок и ссылки в сайдбаре
 st.sidebar.write("[Uzun Demir](https://uzundemir.github.io/)")
 st.sidebar.write("[Github](https://github.com/UzunDemir)")
 st.sidebar.write("[Linkedin](https://www.linkedin.com/in/uzundemir/)")
@@ -125,9 +129,8 @@ output_dtype = output_details[0]['dtype']
 # Назначение классов для предсказаний
 class_names = ['Covid', 'Viral Pneumonia', 'Normal']
 
-# Настройка страницы Streamlit
-st.set_page_config(page_title="Chest X-ray Classifier", layout="wide")
-col1, col2 = st.columns([1, 1])  # Разделение страницы на две колонки
+# Деление страницы на две колонки
+col1, col2 = st.columns([1, 1])
 
 # Блок с левой стороны, для загрузки изображения
 with col1:
