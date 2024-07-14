@@ -136,7 +136,7 @@ col1, col2 = st.columns([1, 1])
 # Блок с левой стороны, для загрузки изображения
 with col1:
     st.title('Диагностика по рентгенограммам грудной клетки')
-    st.markdown('<h3 style="font-weight:normal;">определение COVID-19, пневмонии, или нормального состояния легких.</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 style="font-weight:normal;">Определение COVID-19, пневмонии, или нормального состояния легких.</h3>', unsafe_allow_html=True)
 
     # Загрузка изображения пользователем
     uploaded_file = st.file_uploader("Загрузите изображение и нажмите кнопку 'Диагностика' ", type=["jpg", "jpeg", "png"])
