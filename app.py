@@ -200,40 +200,45 @@ with col1:
                 image = image.resize((input_shape[1], input_shape[2]))  # Изменение размера до нужного для модели
                 image = np.array(image, dtype=np.float32) / 255.0  # Нормализация значений пикселей
                 image = np.expand_dims(image, axis=0)  # Добавление измерения пакета
+                st.session_state['image'] = image  # Сохранение изображения в session_state
+                st.image(Image.open(BytesIO(response.content)), caption="Загруженная рентгенограмма по URL", use_column_width=True)
             except Exception as e:
                 st.error(f"Не удалось загрузить изображение по указанному URL: {e}")
         else:
             st.error("Пожалуйста, введите URL изображения.")
 
     # Процесс предсказания
-    if uploaded_file is not None or (url and 'image' in locals()):
-        # Загрузка и предобработка изображения
-        if uploaded_file is not None:
-            image = Image.open(uploaded_file)
-            if image.mode != "RGB":
-                image = image.convert("RGB")  # Конвертация в RGB, если необходимо
-            image = image.resize((input_shape[1], input_shape[2]))  # Изменение размера до нужного для модели
-            image = np.array(image, dtype=np.float32) / 255.0  # Нормализация значений пикселей
-            image = np.expand_dims(image, axis=0)  # Добавление измерения пакета
+    if uploaded_file is not None:
+        image = Image.open(uploaded_file)
+        if image.mode != "RGB":
+            image = image.convert("RGB")  # Конвертация в RGB, если необходимо
+        image = image.resize((input_shape[1], input_shape[2]))  # Изменение размера до нужного для модели
+        image = np.array(image, dtype=np.float32) / 255.0  # Нормализация значений пикселей
+        image = np.expand_dims(image, axis=0)  # Добавление измерения пакета
+        st.session_state['image'] = image
+        st.image(Image.open(uploaded_file), caption="Загруженная рентгенограмма", use_column_width=True)
 
-        # Функция для выполнения предсказания
-        def predict(image):
-            interpreter.set_tensor(input_details[0]['index'], image.astype(input_dtype))  # Установка входных данных
-            interpreter.invoke()  # Выполнение предсказания
-            predictions = interpreter.get_tensor(output_details[0]['index'])  # Получение результатов предсказания
-            predicted_class_index = np.argmax(predictions, axis=1)  # Определение индекса предсказанного класса
-            predicted_class_name = class_names[predicted_class_index[0]]  # Определение имени предсказанного класса
-            return predicted_class_name
+    # Функция для выполнения предсказания
+    def predict(image):
+        interpreter.set_tensor(input_details[0]['index'], image.astype(input_dtype))  # Установка входных данных
+        interpreter.invoke()  # Выполнение предсказания
+        predictions = interpreter.get_tensor(output_details[0]['index'])  # Получение результатов предсказания
+        predicted_class_index = np.argmax(predictions, axis=1)  # Определение индекса предсказанного класса
+        predicted_class_name = class_names[predicted_class_index[0]]  # Определение имени предсказанного класса
+        return predicted_class_name
 
-        # Кнопка для выполнения предсказания
-        if st.button('Диагностика'):
-            predicted_class_name = predict(image)
+    # Кнопка для выполнения предсказания
+    if st.button('Диагностика'):
+        if 'image' in st.session_state:
+            predicted_class_name = predict(st.session_state['image'])
             # Отображение результата предсказания
             st.markdown(f"<h2>Classified as: <span style='font-style: italic; font-weight: bold;'>{predicted_class_name}</span></h2>", unsafe_allow_html=True)
+        else:
+            st.error("Пожалуйста, загрузите изображение для диагностики.")
 
 # Блок с правой стороны для отображения загруженного изображения
 with col2:
     if uploaded_file is not None:
-        st.image(image, caption="Загруженная рентгенограмма", use_column_width=True)
-    elif url and 'image' in locals():
-        st.image(image, caption="Загруженная рентгенограмма по URL", use_column_width=True)
+        st.image(Image.open(uploaded_file), caption="Загруженная рентгенограмма", use_column_width=True)
+    elif url and 'image' in st.session_state:
+        st.image(Image.open(BytesIO(response.content)), caption="Загруженная рентгенограмма по URL", use_column_width=True)
