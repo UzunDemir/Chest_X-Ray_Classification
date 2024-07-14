@@ -118,25 +118,7 @@ from io import BytesIO
 # Настройка страницы Streamlit в самом начале скрипта
 st.set_page_config(page_title="Chest X-ray Classifier", layout="wide")
 
-# Устанавливаем стиль для центрирования элементов
-st.markdown("""
-    <style>
-    .center {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        flex-direction: column;
-        margin-top: 0vh;  /* отступ сверху */
-    }
-    .github-icon:hover {
-        color: #4078c0; /* Изменение цвета при наведении */
-    }
-    </style>
-    <div class="center">
-        <img src="https://github.com/UzunDemir/Chest_X-Ray_Classification/blob/main/Projectional_rendering_of_CT_scan_of_thorax_(thumbnail).gif?raw=true">        
-    </div>
-    """, unsafe_allow_html=True)
+
 st.divider()
 
 # Заголовок и ссылки в сайдбаре
@@ -144,8 +126,9 @@ st.sidebar.write("[Uzun Demir](https://uzundemir.github.io/)")
 st.sidebar.write("[Github](https://github.com/UzunDemir)")
 st.sidebar.write("[Linkedin](https://www.linkedin.com/in/uzundemir/)")
 st.sidebar.title("Описание проекта")
-st.sidebar.title("Диагностика по рентгенограммам грудной клетки")
 st.sidebar.title('Chest X-Ray Classification')
+st.sidebar.markdown('<img src="https://github.com/UzunDemir/Chest_X-Ray_Classification/blob/main/Projectional_rendering_of_CT_scan_of_thorax_(thumbnail).gif?raw=true" width="100%">', unsafe_allow_html=True)
+st.sidebar.divider()
 st.sidebar.divider()
 st.sidebar.write(
     """
