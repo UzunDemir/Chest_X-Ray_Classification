@@ -4,8 +4,8 @@ import numpy as np
 import tensorflow as tf
 from PIL import Image
 
-# Loading the tflite model
-model_path = "App/main.tflite"
+# загрузка модели
+model_path = "main.tflite"
 interpreter = tf.lite.Interpreter(model_path=model_path)
 interpreter.allocate_tensors()
 
@@ -17,32 +17,32 @@ output_shape = output_details[0]['shape']
 input_dtype = input_details[0]['dtype']
 output_dtype = output_details[0]['dtype']
 
-# Define class names
+# назначение классов предсказания
 class_names = ['Covid', 'Viral Pneumonia', 'Normal']
 
 st.set_page_config(page_title="Chest X-ray Classifier", layout="wide")
 col1, col2 = st.columns([1, 1])  # Divide the page into two columns
 
-# Left column - Image upload
+# загруженное изображение будет слева
 with col1:
     st.title('Chest X-Ray Classification')
     st.markdown('<h3 style="font-weight:normal;">Classify Chest X-ray images into COVID-19, Pneumonia, or Normal.</h3>', unsafe_allow_html=True)
 
-    # Image upload
+    # загрузка изображения
     uploaded_file = st.file_uploader("Upload an image and click the 'Predict Now' button.", type=["jpg", "jpeg", "png"])
 
-    # Image prediction
+    # предсказание
     if uploaded_file is not None:
-        # Load and preprocess the image
+        # загрузка и препроцессинг изображения
         image = Image.open(uploaded_file)
         if image.mode != "RGB":
-            image = image.convert("RGB")  # Convert to RGB if not already
+            image = image.convert("RGB")  # конвертация в RGB 
         image = image.resize((input_shape[1], input_shape[2]))
         image = np.array(image, dtype=np.float32)
         image /= 255.0
         image = np.expand_dims(image, axis=0)
 
-        # Predict function
+        # предсказание
         def predict(image):
             interpreter.set_tensor(input_details[0]['index'], image.astype(input_dtype))
             interpreter.invoke()
@@ -51,13 +51,13 @@ with col1:
             predicted_class_name = class_names[predicted_class_index[0]]
             return predicted_class_name
 
-        # Predict Now button
+        # кнопка предсказания
         if st.button('Predict Now'):
             predicted_class_name = predict(image)
             # Display prediction as a heading in bold font
             st.markdown(f"<h2>Classified as: <span style='font-style: italic; font-weight: bold;'>{predicted_class_name}</span></h2>", unsafe_allow_html=True)
 
-# Display uploaded image
+# отображение загруженного
 with col2:
     if uploaded_file is not None:
         st.image(image, caption="Uploaded Image", use_column_width=True)
