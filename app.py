@@ -94,15 +94,27 @@ from PIL import Image
 # Настройка страницы Streamlit в самом начале скрипта
 st.set_page_config(page_title="Chest X-ray Classifier", layout="wide")
 
-# Функция для вставки изображения сверху посередине
-def display_image_centered(image_url):
-    response = requests.get(image_url)
-    img = Image.open(BytesIO(response.content))
-    st.image(img, caption="Projectional rendering of CT scan of thorax", use_column_width=True)
-
-# Отображение изображения сверху посередине
-image_url = "https://github.com/UzunDemir/Chest_X-Ray_Classification/blob/main/Projectional_rendering_of_CT_scan_of_thorax_(thumbnail).gif?raw=true"
-display_image_centered(image_url)
+# Устанавливаем стиль для центрирования элементов
+st.markdown("""
+    <style>
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /height: 5vh;
+        text-align: center;
+        flex-direction: column;
+        margin-top: 0vh;  /* отступ сверху */
+    }
+    .github-icon:hover {
+        color: #4078c0; /* Изменение цвета при наведении */
+    }
+    </style>
+    <div class="center">
+        <img src="https://github.com/UzunDemir/mnist_777/blob/main/200w.gif?raw=true">        
+    </div>
+    """, unsafe_allow_html=True)
+st.divider()
 
 # Заголовок и ссылки в сайдбаре
 st.sidebar.write("[Uzun Demir](https://uzundemir.github.io/)")
