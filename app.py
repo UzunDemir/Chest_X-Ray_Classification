@@ -25,27 +25,6 @@ st.sidebar.write(
                      """
     )
 
-# Устанавливаем стиль для центрирования элементов
-st.markdown("""
-    <style>
-    .center {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        /height: 5vh;
-        text-align: center;
-        flex-direction: column;
-        margin-top: 0vh;  /* отступ сверху */
-    }
-    .github-icon:hover {
-        color: #4078c0; /* Изменение цвета при наведении */
-    }
-    </style>
-    <div class="center">
-        <img src="https://github.com/UzunDemir/Chest_X-Ray_Classification/blob/main/Projectional_rendering_of_CT_scan_of_thorax_(thumbnail).gif?raw=true">
-        
-    </div>
-    """, unsafe_allow_html=True)
 
 
 # загрузка модели
