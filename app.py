@@ -99,7 +99,8 @@ st.sidebar.write("[Uzun Demir](https://uzundemir.github.io/)")
 st.sidebar.write("[Github](https://github.com/UzunDemir)")
 st.sidebar.write("[Linkedin](https://www.linkedin.com/in/uzundemir/)")
 st.sidebar.title("Описание проекта")
-st.sidebar.title("Handwritten Digits Classifier MNIST")
+st.sidebar.title("Диагностика по рентгенограммам грудной клетки")
+st.sidebar.title('Chest X-Ray Classification')
 st.sidebar.divider()
 st.sidebar.write(
     """
@@ -134,11 +135,11 @@ col1, col2 = st.columns([1, 1])
 
 # Блок с левой стороны, для загрузки изображения
 with col1:
-    st.title('Chest X-Ray Classification')
-    st.markdown('<h3 style="font-weight:normal;">Classify Chest X-ray images into COVID-19, Pneumonia, or Normal.</h3>', unsafe_allow_html=True)
+    st.title('Диагностика по рентгенограммам грудной клетки')
+    st.markdown('<h3 style="font-weight:normal;">определение COVID-19, пневмонии, или нормального состояния легких.</h3>', unsafe_allow_html=True)
 
     # Загрузка изображения пользователем
-    uploaded_file = st.file_uploader("Upload an image and click the 'Predict Now' button.", type=["jpg", "jpeg", "png"])
+    uploaded_file = st.file_uploader("Загрузите изображение и нажмите кнопку 'Диагностика' ", type=["jpg", "jpeg", "png"])
 
     # Процесс предсказания
     if uploaded_file is not None:
@@ -160,7 +161,7 @@ with col1:
             return predicted_class_name
 
         # Кнопка для выполнения предсказания
-        if st.button('Predict Now'):
+        if st.button('Диагностика'):
             predicted_class_name = predict(image)
             # Отображение результата предсказания
             st.markdown(f"<h2>Classified as: <span style='font-style: italic; font-weight: bold;'>{predicted_class_name}</span></h2>", unsafe_allow_html=True)
