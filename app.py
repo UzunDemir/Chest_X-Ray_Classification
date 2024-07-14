@@ -169,4 +169,4 @@ with col1:
 # Блок с правой стороны для отображения загруженного изображения
 with col2:
     if uploaded_file is not None:
-        st.image(image, caption="Uploaded Image", use_column_width=True)
+        st.image(image, caption="Загруженная рентгенограмма", use_column_width=True)
