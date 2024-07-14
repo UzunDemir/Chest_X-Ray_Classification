@@ -43,8 +43,7 @@ st.markdown("""
     </style>
     <div class="center">
         <img src="https://github.com/UzunDemir/Chest_X-Ray_Classification/blob/main/Projectional_rendering_of_CT_scan_of_thorax_(thumbnail).gif?raw=true">
-        # <h1>Классификатор рукописных цифр</h1>
-        # <p>Напишите (пока) только одну цифру!</p>
+        
     </div>
     """, unsafe_allow_html=True)
 
