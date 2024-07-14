@@ -216,7 +216,7 @@ with col1:
         image = np.array(image, dtype=np.float32) / 255.0  # Нормализация значений пикселей
         image = np.expand_dims(image, axis=0)  # Добавление измерения пакета
         st.session_state['image'] = image
-        #st.image(Image.open(uploaded_file), caption="Загруженная рентгенограмма", use_column_width=True)
+        st.image(Image.open(uploaded_file), caption="Загруженная рентгенограмма", use_column_width=True)
 
     # Функция для выполнения предсказания
     def predict(image):
