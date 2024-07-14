@@ -183,40 +183,44 @@ with col1:
     st.title('Диагностика по рентгенограммам грудной клетки')
     st.markdown('<h3 style="font-weight:normal;">Определение COVID-19, пневмонии, или нормального состояния легких.</h3>', unsafe_allow_html=True)
 
-    # Загрузка изображения пользователем
-    uploaded_file = st.file_uploader("Загрузите изображение и нажмите кнопку 'Диагностика' ", type=["jpg", "jpeg", "png"])
+    # Выбор между загрузкой файла и вводом URL
+    option = st.radio("Выберите метод загрузки изображения", ("Загрузить файл", "Ввести URL"))
 
-    # Поле для ввода URL изображения
-    url = st.text_input("Или введите URL изображения и нажмите кнопку 'Загрузить изображение' ")
+    if option == "Загрузить файл":
+        # Загрузка изображения пользователем
+        uploaded_file = st.file_uploader("Загрузите изображение и нажмите кнопку 'Диагностика'", type=["jpg", "jpeg", "png"])
 
-    # Кнопка для загрузки изображения по URL
-    if st.button('Загрузить изображение'):
-        if url:
-            try:
-                response = requests.get(url)
-                image = Image.open(BytesIO(response.content))
-                if image.mode != "RGB":
-                    image = image.convert("RGB")  # Конвертация в RGB, если необходимо
-                image = image.resize((input_shape[1], input_shape[2]))  # Изменение размера до нужного для модели
-                image = np.array(image, dtype=np.float32) / 255.0  # Нормализация значений пикселей
-                image = np.expand_dims(image, axis=0)  # Добавление измерения пакета
-                st.session_state['image'] = image  # Сохранение изображения в session_state
-                st.session_state['image_source'] = "url"
-            except Exception as e:
-                st.error(f"Не удалось загрузить изображение по указанному URL: {e}")
-        else:
-            st.error("Пожалуйста, введите URL изображения.")
+        if uploaded_file is not None:
+            image = Image.open(uploaded_file)
+            if image.mode != "RGB":
+                image = image.convert("RGB")  # Конвертация в RGB, если необходимо
+            image = image.resize((input_shape[1], input_shape[2]))  # Изменение размера до нужного для модели
+            image = np.array(image, dtype=np.float32) / 255.0  # Нормализация значений пикселей
+            image = np.expand_dims(image, axis=0)  # Добавление измерения пакета
+            st.session_state['image'] = image
+            st.session_state['image_source'] = "upload"
 
-    # Процесс предсказания
-    if uploaded_file is not None:
-        image = Image.open(uploaded_file)
-        if image.mode != "RGB":
-            image = image.convert("RGB")  # Конвертация в RGB, если необходимо
-        image = image.resize((input_shape[1], input_shape[2]))  # Изменение размера до нужного для модели
-        image = np.array(image, dtype=np.float32) / 255.0  # Нормализация значений пикселей
-        image = np.expand_dims(image, axis=0)  # Добавление измерения пакета
-        st.session_state['image'] = image
-        st.session_state['image_source'] = "upload"
+    elif option == "Ввести URL":
+        # Поле для ввода URL изображения
+        url = st.text_input("Введите URL изображения и нажмите кнопку 'Загрузить изображение'")
+
+        # Кнопка для загрузки изображения по URL
+        if st.button('Загрузить изображение'):
+            if url:
+                try:
+                    response = requests.get(url)
+                    image = Image.open(BytesIO(response.content))
+                    if image.mode != "RGB":
+                        image = image.convert("RGB")  # Конвертация в RGB, если необходимо
+                    image = image.resize((input_shape[1], input_shape[2]))  # Изменение размера до нужного для модели
+                    image = np.array(image, dtype=np.float32) / 255.0  # Нормализация значений пикселей
+                    image = np.expand_dims(image, axis=0)  # Добавление измерения пакета
+                    st.session_state['image'] = image  # Сохранение изображения в session_state
+                    st.session_state['image_source'] = "url"
+                except Exception as e:
+                    st.error(f"Не удалось загрузить изображение по указанному URL: {e}")
+            else:
+                st.error("Пожалуйста, введите URL изображения.")
 
     # Функция для выполнения предсказания
     def predict(image):
