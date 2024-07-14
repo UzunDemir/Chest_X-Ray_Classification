@@ -201,7 +201,7 @@ with col1:
                 image = np.array(image, dtype=np.float32) / 255.0  # Нормализация значений пикселей
                 image = np.expand_dims(image, axis=0)  # Добавление измерения пакета
                 st.session_state['image'] = image  # Сохранение изображения в session_state
-                st.session_state['image_origin'] = 'url'
+                st.session_state['image_source'] = "url"
             except Exception as e:
                 st.error(f"Не удалось загрузить изображение по указанному URL: {e}")
         else:
@@ -216,7 +216,7 @@ with col1:
         image = np.array(image, dtype=np.float32) / 255.0  # Нормализация значений пикселей
         image = np.expand_dims(image, axis=0)  # Добавление измерения пакета
         st.session_state['image'] = image
-        st.session_state['image_origin'] = 'upload'
+        st.session_state['image_source'] = "upload"
 
     # Функция для выполнения предсказания
     def predict(image):
@@ -239,7 +239,7 @@ with col1:
 # Блок с правой стороны для отображения загруженного изображения
 with col2:
     if 'image' in st.session_state:
-        if st.session_state['image_origin'] == 'upload':
+        if st.session_state['image_source'] == "upload":
             st.image(Image.open(uploaded_file), caption="Загруженная рентгенограмма", use_column_width=True)
-        elif st.session_state['image_origin'] == 'url':
+        elif st.session_state['image_source'] == "url":
             st.image(Image.open(BytesIO(response.content)), caption="Загруженная рентгенограмма по URL", use_column_width=True)
