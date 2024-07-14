@@ -4,6 +4,51 @@ import numpy as np
 import tensorflow as tf
 from PIL import Image
 
+st.sidebar.write("[Uzun Demir](https://uzundemir.github.io/)") #[Github](https://github.com/UzunDemir)     [Linkedin](https://www.linkedin.com/in/uzundemir/)     
+st.sidebar.write("[Github](https://github.com/UzunDemir)")
+st.sidebar.write("[Linkedin](https://www.linkedin.com/in/uzundemir/)")
+st.sidebar.title("Описание проекта")
+st.sidebar.title("Handwritten Digits Classifier MNIST")
+st.sidebar.divider()
+st.sidebar.write(
+        """
+                                       
+                     Эта приложение выполнено как самостоятельное исследование в рамках обучения по модулю Computer Vision курса Machine Learning Advanced от Skillbox. 
+                     
+                     1. Вначале была обучена модель диагностики по рентгеновским снимкам следующих состояний: COVID-19, пневмония, нормальное состояние легких. 
+                     Я использовал много разных моделей и остановил свой выбор на сверточной нейронной сети (Convolutional Neural Network, CNN)
+                     которая показала точность на тестовом наборе данных: 0.86.
+                     Ноутбук с исследованиями можно посмотреть [здесь.](https://github.com/UzunDemir/Chest_X-Ray_Classification/blob/main/Model.ipynb)
+                     2. Вторым шагом я решил обернуть готовую модель в сервис и запустить её как веб-приложение, которое давало бы предсказания по загруженным рентгенограмам.
+                     3. 
+                     
+                     """
+    )
+
+# Устанавливаем стиль для центрирования элементов
+st.markdown("""
+    <style>
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /height: 5vh;
+        text-align: center;
+        flex-direction: column;
+        margin-top: 0vh;  /* отступ сверху */
+    }
+    .github-icon:hover {
+        color: #4078c0; /* Изменение цвета при наведении */
+    }
+    </style>
+    <div class="center">
+        <img src="https://github.com/UzunDemir/Chest_X-Ray_Classification/blob/main/Projectional_rendering_of_CT_scan_of_thorax_(thumbnail).gif?raw=true">
+        # <h1>Классификатор рукописных цифр</h1>
+        # <p>Напишите (пока) только одну цифру!</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+
 # загрузка модели
 model_path = "main.tflite"
 interpreter = tf.lite.Interpreter(model_path=model_path)
