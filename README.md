@@ -1,6 +1,10 @@
 # Классификация рентгенограмм грудной клетки
 ## Целью этого проекта является классификация рентгеновских изображений грудной клетки на три категории: COVID-19, пневмония и норма, с использованием модели сверточной нейронной сети (CNN).
 
+![Projectional_rendering_of_CT_scan_of_thorax_(thumbnail)](https://github.com/user-attachments/assets/99b47383-fff7-4741-aead-bf985f5512d6)
+
+
+
 * Изображения для тестирования можно взять [отсюда](https://github.com/UzunDemir/Chest_X-Ray_Classification/tree/main/Test_images)
 
 ## Данные для обучения модели
