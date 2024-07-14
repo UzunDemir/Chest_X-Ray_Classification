@@ -199,6 +199,7 @@ with col1:
             image = np.expand_dims(image, axis=0)  # Добавление измерения пакета
             st.session_state['image'] = image
             st.session_state['image_source'] = "upload"
+            st.session_state['uploaded_file'] = uploaded_file
 
     elif option == "Ввести URL":
         # Поле для ввода URL изображения
@@ -217,6 +218,7 @@ with col1:
                     image = np.expand_dims(image, axis=0)  # Добавление измерения пакета
                     st.session_state['image'] = image  # Сохранение изображения в session_state
                     st.session_state['image_source'] = "url"
+                    st.session_state['image_url_response'] = response.content
                 except Exception as e:
                     st.error(f"Не удалось загрузить изображение по указанному URL: {e}")
             else:
@@ -244,6 +246,6 @@ with col1:
 with col2:
     if 'image' in st.session_state:
         if st.session_state['image_source'] == "upload":
-            st.image(Image.open(uploaded_file), caption="Загруженная рентгенограмма", use_column_width=True)
+            st.image(Image.open(st.session_state['uploaded_file']), caption="Загруженная рентгенограмма", use_column_width=True)
         elif st.session_state['image_source'] == "url":
-            st.image(Image.open(BytesIO(response.content)), caption="Загруженная рентгенограмма по URL", use_column_width=True)
+            st.image(Image.open(BytesIO(st.session_state['image_url_response'])), caption="Загруженная рентгенограмма по URL", use_column_width=True)
