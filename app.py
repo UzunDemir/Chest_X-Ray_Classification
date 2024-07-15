@@ -183,7 +183,7 @@ col1, col2 = st.columns([1, 1])
 with col1:
     st.title('Диагностика по рентгенограммам грудной клетки')
     st.markdown('<h3 style="font-weight:normal;">Определение COVID-19, пневмонии, или нормального состояния легких.</h3>', unsafe_allow_html=True)
-    st.markdown('<h4 style="font-weight:normal;">Изображения для тестирования можно взять [отсюда](https://github.com/UzunDemir/Chest_X-Ray_Classification/tree/main/Test_images)</h4>', unsafe_allow_html=True)
+    st.markdown('<h3 style="font-weight:normal; color:blue; font-style:italic;">Изображения для тестирования можно взять <a href="https://github.com/UzunDemir/Chest_X-Ray_Classification/tree/main/Test_images" style="color:blue;">отсюда</a></h3>', unsafe_allow_html=True)
 
     # Выбор между загрузкой файла и вводом URL
     option = st.radio("Выберите метод загрузки изображения", ("Загрузить файл", "Ввести URL"))
