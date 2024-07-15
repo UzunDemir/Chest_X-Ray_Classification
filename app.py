@@ -357,7 +357,7 @@ with col1:
             url = st.text_input("Введите URL изображения и нажмите кнопку 'Загрузить изображение'", key="url_input")
         with col_clear:
             if st.button('Очистить', key="clear_button"):
-                st.session_state.url_input = ""
+                st.session_state['url_input'] = ""
 
         st.markdown('<h5 style="font-weight:normal; color:blue; font-style:italic;">Изображения для тестирования можно взять <a href="https://github.com/UzunDemir/Chest_X-Ray_Classification/tree/main/Test_images" style="color:blue;">отсюда</a></h5>', unsafe_allow_html=True)
         
