@@ -226,6 +226,10 @@ with col1:
             else:
                 st.error("Пожалуйста, введите URL изображения.")
 
+            # Кнопка для очистки поля ввода URL
+        if st.button('Очистить'):
+            st.experimental_rerun()
+
     # Функция для выполнения предсказания
     def predict(image):
         interpreter.set_tensor(input_details[0]['index'], image.astype(input_dtype))  # Установка входных данных
