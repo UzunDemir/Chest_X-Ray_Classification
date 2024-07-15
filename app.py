@@ -205,6 +205,7 @@ with col1:
     elif option == "Ввести URL":
         # Поле для ввода URL изображения
         url = st.text_input("Введите URL изображения и нажмите кнопку 'Загрузить изображение'")
+        st.markdown('<h3 style="font-weight:normal;">Изображения для тестирования можно взять [отсюда](https://github.com/UzunDemir/Chest_X-Ray_Classification/tree/main/Test_images)</h3>', unsafe_allow_html=True)
 
         # Кнопка для загрузки изображения по URL
         if st.button('Загрузить изображение'):
