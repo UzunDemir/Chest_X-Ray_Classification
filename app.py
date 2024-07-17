@@ -137,7 +137,7 @@ st.divider()
 # Заголовок и ссылки в сайдбаре
 st.sidebar.divider()
 st.sidebar.write("[Uzun Demir](https://uzundemir.github.io/)")
-st.sidebar.write("[Github](https://github.com/UzunDemir)")
+st.sidebar.write("[Github](https://github.com/UzunDemir/Chest_X-Ray_Classification)")
 st.sidebar.write("[Linkedin](https://www.linkedin.com/in/uzundemir/)")
 st.sidebar.title("Описание проекта")
 st.sidebar.title('Chest X-Ray Classification')
