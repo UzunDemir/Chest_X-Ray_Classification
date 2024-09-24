@@ -32,7 +32,7 @@
 ## Пример предсказания
 ![predict](https://user-images.githubusercontent.com/97530517/231856798-74574e8d-fb31-45b0-a681-b9579900924d.jpg)
 
-## Модель развернута на streamlit и доступна по адресу: 
+## Модель развернута на streamlit и доступна по адресу: [https://chest-x-ray.streamlit.app/](https://chest-x-ray.streamlit.app/)
 
 
 
